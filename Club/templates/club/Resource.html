@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>Resources:</h1>
+<table class="res-table">
+  <tr>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Type</td>
+    <td>URL</td>
+    <td class="res-des">Description</td>
+    <td>Date</td>
+    <td>Created By</td>
+  </tr>
+  {% for res in Resource %}
+
+  <tr class="{% cycle 'bgcolor' '' %}">
+    <td>{{res.id}}</td>
+    <td>{{res.name}}</td>
+    <td>{{res.type}}</td>
+    <td>{{res.URL}}</td>
+    <td class="res-des">{{res.description}}</td>
+    <td>{{res.date}}</td>
+    <td>{{res.userid.username}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
