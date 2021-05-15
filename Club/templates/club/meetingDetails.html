@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Meetings Details:</h1>
+<table class="met-table">
+  <tr>
+    <td>ID</td>
+    <td>{{details.id}}</td>
+  </tr>
+  <tr class="met-bgcolor">
+    <td>Title</td>
+    <td>{{details.title}}</td>
+  </tr>
+  <tr>
+    <td>Date</td>
+    <td>{{details.date}}</td>
+  </tr>
+  <tr class="met-bgcolor">
+    <td>Time</td>
+    <td>{{details.time}}</td>
+  </tr>
+  <tr>
+    <td>Location</td>
+    <td>{{details.location}}</td>
+  </tr>
+  <tr class="met-bgcolor">
+    <td>Agenda</td>
+    <td>{{details.Agenda}}</td>
+  </tr>
+</table>
+{% endblock %}

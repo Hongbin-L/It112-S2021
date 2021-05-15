@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Meetings :</h1>
+<table class="met-table">
+  <tr>
+    <td>ID</td>
+    <td>Title</td>
+  </tr>
+  {% for met in Meetings %}
+  <tr class="{% cycle 'met-bgcolor' '' %}">
+    <td>{{met.id}}</td>
+    <td>
+      <a href="{% url 'meetingDetails' id=met.id %}">{{ met.title }}</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
