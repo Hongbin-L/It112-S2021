@@ -26,7 +26,7 @@ class MinuteTest(TestCase):
 class EventTest(TestCase):
 
     def test_string(self):
-        testEvent = Event(title='Minute')
+        testEvent = Event(title='Event')
         self.assertEqual(str(testEvent), testEvent.title)
 
     def test_table(self):
@@ -76,8 +76,7 @@ class MeetingDetailsTest(TestCase):
 
     def test_meeting_details_success(self):
         response = self.client.get(
-            reverse('meetingDetails', args=(self.meeting1.id,)))
-        # Assert that self.post is actually returned by the post_detail view
+        reverse('meetingDetails', args=(self.meeting1.id,)))
         self.assertEqual(response.status_code, 200)
 
     def test_number_of_meeting(self):
