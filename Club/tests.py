@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 import datetime
 from django.urls import reverse
 from django.utils import timezone
+from .views import newResource
+from .forms import ResourceForm
 
 # Create your tests here.
 class MeetingTest(TestCase):
@@ -82,3 +84,23 @@ class MeetingDetailsTest(TestCase):
     def test_number_of_meeting(self):
         meetingCount = Meeting.objects.count()
         self.assertEqual(meetingCount, 2)
+
+    class FormTest(TestCase):
+        def setUpTestData(cls):
+            cls.testUser = User.objects.create(
+                username='Hongbin', password="password")
+
+        def test_resource_form_request_login(self):
+            response = self.client.get('/club/newResource')
+            self.assertRedirects(
+                response, '/accounts/login/?next=/club/newResource')
+
+        def test_resource_form_is_valid(self):
+            form = ResourceForm(
+                data={'name': "test_resource",
+                    'type': "test type",
+                    "URL": "www.test.com",
+                    "description": "test description",
+                    "userid": self.testUser,
+                    "date": "2021-06-01"})
+            self.assertTrue(form.is_valid())
