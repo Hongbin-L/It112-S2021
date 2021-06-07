@@ -88,7 +88,7 @@ class MeetingDetailsTest(TestCase):
     class FormTest(TestCase):
         def setUpTestData(cls):
             cls.testUser = User.objects.create(
-                username='Hongbin', password="password")
+                username='userOne', password="p@ssw0rd1")
 
         def test_resource_form_request_login(self):
             response = self.client.get('/club/newResource')
@@ -104,3 +104,22 @@ class MeetingDetailsTest(TestCase):
                     "userid": self.testUser,
                     "date": "2021-06-01"})
             self.assertTrue(form.is_valid())
+
+        def test_resource_form_templates_used(self):
+            # login
+            self.client.force_login(self.testUser)
+            response = self.client.get('/club/newResource')
+            self.assertTemplateUsed("club/newResource.html")
+
+        def test_resource_form_templates_context(self):
+            # login
+            self.client.force_login(self.testUser)
+            response = self.client.get('/club/newResource')
+            self.assertFalse(response.context["isSaveOne"])
+            form = ResourceForm()
+            self.assertContains(response, form.as_table())
+
+        def test_resource_form_view(self):
+            self.client.force_login(self.testUser)
+            response = self.client.get('/club/newResource')
+            self.assertEqual(response.resolver_match.func, newResource)
