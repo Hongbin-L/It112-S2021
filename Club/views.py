@@ -19,17 +19,6 @@ def meetingDetails(request, id):
     details = get_object_or_404(Meeting, pk=id)
     return render(request, 'club/meetingDetails.html', {"details": details})
 
-@login_required
-def newResource(request):
-    isSaveOne = False
-    if request.method == 'POST':
-        form = ResourceForm(request.POST)
-        if form.is_valid():
-            newres = form.save()
-            isSaveOne = True
-    form = ResourceForm()
-    return render(request, 'club/newResource.html', {'form': form, 'isSaveOne': isSaveOne})
-
 
 @login_required
 def newMeeting(request):
